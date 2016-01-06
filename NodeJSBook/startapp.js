@@ -13,6 +13,9 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(express.static(__dirname + '/public'));
 
+//This prevents the response header information. By default the info that is seen by the client is: "X-Powered-By:Express"
+app.disable('x-powered-by');
+
 //This is to perform unit testing. If query params include test =1 then unit tests are executed?? and displayed. 
 app.use(function(req, res, next){
 	res.locals.showTests = app.get('env') !== 'production' &&
@@ -24,10 +27,21 @@ app.use(function(req, res, next){
 app.get('/', function(req, res) {
 	res.render('home');
 });
+
+//Get the headers that were sent by the browser...
+app.get('/headers', function(req,res){
+	res.set('Content-Type','text/plain');
+	var s = '';
+	for(var name in req.headers) s += name + ': ' + req.headers[name] + '\n'; res.send(s);
+	});
+
+
+
 app.get('/about', function(req, res) {
 	var randomFortune = fortune.getFortune();
 	res.render('about', {
-		fortune : randomFortune
+		fortune : randomFortune,
+		pageTestScript: '/qa/tests-about.js'
 	});
 });
 // 404 catch-all handler (middleware)
@@ -43,6 +57,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(app.get('port'), function() {
-	console.log('Express started on http://localhost:' + app.get('port')
-			+ '; press Ctrl-C to terminate.');
+	console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
