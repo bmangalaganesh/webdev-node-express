@@ -1,28 +1,19 @@
 {
-	
-   "author": {
-	   "name": "Manglu Balasubramanian",
-	   "email": "manglu@gmail.com"
-	  },
-
-   "repository": {
-		    "type": "git",
-		    "url": "git+https://github.com/bmangalaganesh/webdev-node-express"
-	},
-		  
   "name": "NodeJSBook",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node startapp.js"
   },
-  
-  "devDependencies":{
-	  "mocha": "2.3.4",
-	  "chai": "3.4.1",
-	  "zombie": "*"  
+  "devDependencies": {
+    "chai": "3.4.1",
+    "grunt": "^0.4.5",
+    "grunt-cafe-mocha": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-exec": "^0.4.6",
+    "mocha": "2.3.4",
+    "zombie": "*"
   },
-  
   "dependencies": {
     "express": "3.2.6",
     "express-handlebars": "*"
